@@ -13,40 +13,25 @@
     <header>
         <h1>Memo</h1>
     </header>
+
     <main>
         <div class="item">
-            <div>
-                <form action="">
-                    <input type="text" placeholder="item name">
-                </form>
-            </div>
-            <div>
-                <form action="">
-                    <input type="text" placeholder="item description">
-                </form>
-            </div>
-            <div>
-                <button>Add Item</button>
-            </div>
+            <input type="text" id="item-name" placeholder="item name">
+            <input type="text" id="item-des" placeholder="item description">
+            <button class="btn" id="addButton">Add Item</button>
         </div>
-        <div class="description">
-            <div class="name">
-                <h2>wake up</h2>
-                <p>i have to wake up by 6am unless i am late</p>
-                <i class="fa-solid fa-x"></i>
-            </div>
-            <div class="name">
-                <h2>get coffee</h2>
-                <p>what else will i start my day with</p>
-                <i class="fa-solid fa-x"></i>
-            </div>
-            <div class="name">
-                <h2>go to work by 8am</h2>
-                <p>who is going to pay my bills</p>
-                <i class="fa-solid fa-x"></i>
-            </div>
-        </div>
+
+
+        <ul></ul>
+
     </main>
+
+    <script src="index.js" type="module">
+
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.2.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore-compat.js"></script>
 </body>
 
 </html>
