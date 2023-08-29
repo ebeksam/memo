@@ -1,3 +1,4 @@
+// import { addDoc, collection } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAuUJOtd8AeE15gwtF70wo4swYXZQLFJxk",
@@ -9,11 +10,17 @@ const firebaseConfig = {
   measurementId: "G-W13KP97TGW"
 };
 
+// init Firebase App
 firebase.initializeApp(firebaseConfig);
 
+//init services
    const db = firebase.firestore();
 
-   console.log(db)
+// collection ref
+
+
+// const colRef = collection(db, 'memo')
+
 
 
 const addButton = document.querySelector("#addButton")
@@ -23,8 +30,6 @@ const itemDes = document.querySelector("#item-des")
 addButton.addEventListener("click", addTask);
 
 function addTask() {
-
- 
 
   // Creating Element
 
@@ -45,9 +50,19 @@ function addTask() {
   li.innerHTML = `<h2>${taskName}</h2><p>${taskDes}</P><button class="delete-btn">X</button>`;
 
   // Delete Button
-  const deleteButton = li.querySelector("button")
-  deleteButton.addEventListener("click", function () {
-      li.remove();
+  // const deleteButton = li.querySelector("button")
+  // deleteButton.addEventListener("click", function () {
+  //     li.remove();
+  // });
+
+
+  //  Adding to firestore
+
+  addButton.addEventListener("click", () => {
+    db.collection("memo").add({
+      name: taskName,
+      desc: taskDes
+    })
   });
 
   itemName.value = "";
