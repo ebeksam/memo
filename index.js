@@ -20,56 +20,50 @@ firebase.initializeApp(firebaseConfig);
 
 
 // const colRef = collection(db, 'memo')
-
-
-
 const addButton = document.querySelector("#addButton")
 const itemName = document.querySelector("#item-name")
 const itemDes = document.querySelector("#item-des")
-
+const ul = document.querySelector('ul');
+ 
+  
 addButton.addEventListener("click", addTask);
 
 function addTask() {
-
   // Creating Element
-
-  const ul = document.querySelector('ul')
-  const li = document.createElement('li')
+  const li = document.createElement('li');
 
   // Adding Element
+  ul.append(li);
 
-  ul.append(li)
-
-  // modifying the text
-
-  const taskName = itemName.value
-  const taskDes = itemDes.value
+  // Modifying the text
+  const taskName = itemName.value;
+  const taskDes = itemDes.value;
 
   li.classList.add('name');
-
-  li.innerHTML = `<h2>${taskName}</h2><p>${taskDes}</P><button class="delete-btn">X</button>`;
+  li.innerHTML = `<h2>${taskName}</h2><p>${taskDes}</p><button class="delete-btn">X</button>`;
 
   // Delete Button
-  // const deleteButton = li.querySelector("button")
-  // deleteButton.addEventListener("click", function () {
-  //     li.remove();
-  // });
-
-
-  //  Adding to firestore
-
-  addButton.addEventListener("click", () => {
-    db.collection("memo").add({
-      name: taskName,
-      desc: taskDes
-    })
+  const deleteButton = li.querySelector(".delete-btn");
+  deleteButton.addEventListener("click", function () {
+    li.remove();
   });
 
+  // Clear input values
   itemName.value = "";
   itemDes.value = "";
-
 }
+addButton.addEventListener("click", () => {
+  const taskName = itemName.value;
+  const taskDes = itemDes.value;
 
-  
-  
-  
+  db.collection("memo").add({
+    name: taskName,
+    desc: taskDes
+  })
+  .then(() => {
+    console.log("Item added to Firestore");
+  })
+  .catch(error => {
+    console.error("Error adding item:", error);
+  });
+});
