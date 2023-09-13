@@ -63,6 +63,43 @@ const itemDes = document.getElementById("item-des")
 
  
 }
+
+
+function getItems(){
+
+  db.collection("memo").onSnapshot((snapshot) => {
+    console.log(snapshot)
+
+    let items = []
+    snapshot.docs.forEach((doc) => {
+     items.push({
+      id: doc.id,
+      ...doc.data()
+    })
+    })
+
+    generateItems(items)
+  })
+}
+
+function generateItems(items){
+
+  let itemHTML = ""
+  items.forEach((item) => {
+     console.log(item)
+    itemHTML += `
+    <li class="name">
+    <h2>${item.name}</h2>
+    <p>${item.desc}</p>
+    <button class="delete-btn">X</button>
+    </li>
+    `
+  })
+
+  document.querySelector(".memo-items").innerHTML = itemHTML
+}
+
+getItems()
 // 
 //   const taskName = itemName.value;
 //   const taskDes = itemDes.value;
